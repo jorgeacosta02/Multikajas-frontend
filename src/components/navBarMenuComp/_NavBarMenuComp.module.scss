@@ -1,6 +1,7 @@
 @use "../../styles/globals" as g;
 
 .container{
+    // background-color: grey;
     @include g.create-flexbox(column, center);
     .menu{
         box-sizing: border-box;

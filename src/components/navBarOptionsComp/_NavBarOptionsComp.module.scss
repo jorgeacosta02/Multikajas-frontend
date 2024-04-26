@@ -2,9 +2,9 @@
 
 .container{
     width: 40%;
-    max-width: 110px;
-    min-width: 93px;
-    @include g.create-flexbox(row, space-between);
+    max-width: 50px;
+    min-width: 40px;
+    @include g.create-flexbox(row, center);
     color: g.$white-color;
     background-color: inherit;
     // background-color: green;

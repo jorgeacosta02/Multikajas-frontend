@@ -1,14 +1,15 @@
 @use "../../styles/globals" as g;
 
 .container {
+    max-width: 150px;
+    // background-color: green;
     @include g.create-flexbox(row,flex-start);
     height: 100%;
     .logo {
 
         // font-size: max(#{14px}, #{4vw});
         // color: g.$main-color;
-        max-width: 90%;
-        max-height: 90%;
+        width: 100%;
         overflow: hidden; /* Evita que el texto se muestre antes de la animación */
         white-space: nowrap; /* Evita que el texto se divida en varias líneas */
         // border-right: 8px solid orange; /* Simula el cursor de escritura */

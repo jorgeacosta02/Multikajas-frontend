@@ -13,6 +13,7 @@
     margin: 0;
     @include g.create-flexbox(row, space-between);
     z-index: 1000;
+    // background-color: blue;
     @include g.display-large{
         width: 100%;
         height: g.$desk-NavBar-height;

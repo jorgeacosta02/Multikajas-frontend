@@ -4,18 +4,18 @@ import { useSelector } from 'react-redux';
 import { selectMoonState } from '../../redux/slices/moonSlice';
 
 // Importa tus imágenes
-import img01 from '../../assets/images/slider/cajaCambios01.jpg';
+import img01 from '../../assets/images/slider/gifCar01.webp';
 import img02 from '../../assets/images/slider/motor01.jpg';
 import img03 from '../../assets/images/slider/embrague01.jpg';
-import img04 from '../../assets/images/slider/piezas01.jpg';
-import img05 from '../../assets/images/slider/auto01.jpg';
+import img04 from '../../assets/images/slider/wrc-rally.gif';
+import img05 from '../../assets/images/slider/gifCar04.webp';
 import img06 from '../../assets/images/slider/cajaCambios02.jpg';
 import img07 from '../../assets/images/slider/embrague02.jpg';
 import img08 from '../../assets/images/slider/motor02.jpg';
-import img09 from '../../assets/images/slider/piezas02.jpg';
+import img09 from '../../assets/images/slider/gifCar02.webp';
 import img10 from '../../assets/images/slider/motor03.jpg';
 import img11 from '../../assets/images/slider/amortiguador021.jpg';
-import img12 from '../../assets/images/slider/engranajes03.jpg';
+import img12 from '../../assets/images/slider/gifCar03.webp';
 
 
 const SliderComp = () => {

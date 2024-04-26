@@ -1,0 +1,80 @@
+@use "../../styles/globals" as g;
+
+.container {
+    // Otros estilos de contenedor si los hay
+
+    .logo {
+        margin: 0;
+        padding: 0;
+        font-size: max(#{14px}, #{4vw});
+        color: g.$main-color;
+        overflow: hidden; /* Evita que el texto se muestre antes de la animación */
+        white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+        border-right: 8px solid orange; /* Simula el cursor de escritura */
+        animation: typing 1s steps(40, end); /* Define la animación */
+        // background-color: red;
+
+
+        @include g.display-large {
+            width: auto;
+            // height: 50px;
+            font-size: g.$desk-h3-font-size;
+        }
+    }
+    .animationComplete {
+        border-right: .15em solid transparent; /* Desaparece el cursor naranja */
+    }
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// @use "../../styles/globals" as g;
+
+// .container {
+//     // Otros estilos de contenedor si los hay
+
+//     .logo {
+//         margin: 0;
+//         padding: 0;
+//         // font-weight: 400;
+//         color: g.$white-color;
+//         overflow: hidden; /* Evita que el texto se muestre antes de la animación */
+//         white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+//         border-right: .15em solid orange; /* Simula el cursor de escritura */
+//         animation: typing 3s steps(20, end); /* Define la animación */
+//         // background-color: blue;
+
+//         @include g.display-large {
+//             width: auto;
+//             height: 50px;
+//         }
+//     }
+// }
+
+// @keyframes typing {
+//     from { width: 0 }
+//     to { width: 100% }
+// }

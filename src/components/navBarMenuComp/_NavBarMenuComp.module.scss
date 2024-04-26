@@ -1,0 +1,29 @@
+@use "../../styles/globals" as g;
+
+.container{
+    @include g.create-flexbox(column, center);
+    .menu{
+        box-sizing: border-box;
+        font-size: 35px;
+        width: 20px;
+        height: 20px;
+        fill: g.$white-color;
+        z-index: 1000;
+        margin-right: 2vw;
+        cursor: pointer;
+        @include g.display-large{
+            display: none;
+        }
+    }
+    .menuWhite{
+        fill: g.$dark-black-color;
+    }
+    .menu:hover{
+        background-color: rgba(157, 157, 157, .1);
+        @include g.display-large{
+            background-color: transparent;
+            fill: g.$main-color;
+            transform:scale(1.1);
+        }
+    }
+}

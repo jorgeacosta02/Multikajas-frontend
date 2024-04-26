@@ -1,0 +1,18 @@
+@use '../../styles/globals' as g;
+
+.container{
+    box-sizing: border-box;
+    width: 100%;
+    padding: g.$mobile-main-container-padding;
+    padding-bottom: 100px;
+    background-color: rgb(36, 36, 36);
+    color: g.$white-color;
+    @include g.create-flexbox(column, space-between);
+    @include g.display-large{
+        margin-top: g.$desk-NavBar-height;
+        flex-direction: row;
+        align-items: flex-start;
+        padding: g.$desk-main-container-padding;
+        padding-bottom: 100px;
+    }
+}

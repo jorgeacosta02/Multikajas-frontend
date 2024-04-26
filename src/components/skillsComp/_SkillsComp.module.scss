@@ -1,0 +1,79 @@
+@use '../../styles/globals' as g;
+
+.container{
+    position: absolute;
+    box-sizing: border-box;
+    width: 100vw;
+    color: g.$white-color;
+    @include g.create-flexbox(row, center);
+    align-items: center;
+    .dataContainer{
+        position: relative;
+        top: g.$mobile-NavBar-height;
+        width: 90%;
+        @include g.create-flexbox(column, space-between);
+        padding: 5vh 0;
+        gap: 8vh;
+        // background-color: red;
+        color: inherit;
+        z-index: 50;
+        @include g.display-large{
+            top: g.$desk-NavBar-height;
+            // gap: 0;
+            justify-content: space-around;
+        }
+
+        .comment{
+            box-sizing: border-box;
+            width: 90%;
+            color: inherit;
+            text-align: center;
+            // background-color: blue;
+        }
+
+        .skillsContainer{
+            box-sizing: border-box;
+            position: relative;
+            width: 100%;
+            color: inherit;
+            z-index: 30;
+            // background-color: blue;
+            @include g.create-flexbox(row, space-evenly);
+            flex-wrap: wrap;
+            gap: 6vw;
+            padding: 2vh;
+            border: 1px solid g.$grey-color;
+            border-radius: 3px;
+            box-shadow: 2px 2px 2px 2px  rgba(45, 45, 45, 0.9);
+            background-color: rgba(0,0,0,.45);
+        
+            @include g.display-large{
+                box-sizing: border-box;
+                align-items: center;
+                gap: 20px;
+                padding: 7vh;
+            }
+            .skillLogo{
+                width: min(20vw, 20vh);
+                min-width: 50px;
+                max-width: 100px;
+                border-radius: 8px;
+                transition: 200ms ease;
+                &:hover{
+                    box-shadow: 20px 20px 20px rgba(0,0,0,1);
+                    transform:scale(1.2);
+                    transform-origin: center;
+                }
+                @include g.display-large{
+                    width: 10%;
+                }
+            }
+        }
+        .skContWhite{
+            background-color: rgba(255,255,255,.7);
+        }
+    }
+}
+.containerWhite{
+    color: g.$dark-black-color;
+}

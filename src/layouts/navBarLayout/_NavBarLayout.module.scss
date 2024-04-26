@@ -1,0 +1,27 @@
+@use '../../styles/globals' as g;
+
+
+.navBar {
+    box-sizing: border-box;
+    position: fixed;
+    width: 100vw;
+    height: max(#{g.$mobile-NavBar-height}, #{20px});
+    min-height: 35px;
+    top: 0;
+    left: 0;
+    padding: 0 3vw;
+    margin: 0;
+    @include g.create-flexbox(row, space-between);
+    z-index: 1000;
+    @include g.display-large{
+        width: 100%;
+        height: g.$desk-NavBar-height;
+        padding: 0 5vw;
+    }
+}
+.backgDark {
+    background-color: g.$dark-black-color;
+}
+.backgLight{
+    background-color: g.$white-color;
+}

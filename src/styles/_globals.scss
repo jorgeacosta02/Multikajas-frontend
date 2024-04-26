@@ -1,0 +1,106 @@
+//Imports
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet');
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet');
+
+// General variables
+
+// Colors
+
+
+
+// Orange
+// $main-color: rgb(219, 113, 0);
+// $main-dark-color: rgb(168, 81, 0);
+
+// Red
+// $main-color: rgb(194, 0, 0);
+// $main-dark-color: rgb(102, 0, 0);
+
+// Blue
+$main-color: rgb(0, 68, 255);
+$main-dark-color: rgb(14, 55, 169);
+
+
+$main-light-color: rgb(90, 234, 71);
+$main-light2-color: rgb(189, 221, 162);
+$main-light3-color: rgb(215, 225, 210);
+$white-color: white;
+$dark-black-color: black;
+$light-black-color: rgb(33, 33, 33);
+$grey-color: grey;
+$red-color: red;
+
+// Fonts
+$primary-font: 'Roboto';
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// Mobile variables
+$mobile-NavBar-height: 60px;
+$mobile-main-container-padding: 2vh 2vw;
+$mobile-h1-font-size: max(#{38px}, #{6vw});
+$mobile-h1-font-weight: 700;
+$mobile-h2-font-size: max(#{30px}, #{5vw});
+$mobile-h2-font-weight: 600;
+$mobile-h3-font-size:max(#{23px}, #{4vw});
+$mobile-h3-font-weight: 500;
+$mobile-h4-font-size: max(#{19px}, #{3vw});
+$mobile-h4-font-weight: 500;
+$mobile-h5-font-size: max(#{15px}, #{2.2vw});
+$mobile-h5-font-weight: 500;
+$mobile-h6-font-size: max(#{14px}, #{1.4vw});
+$mobile-h6-font-weight: 500;
+$mobile-p-font-size: max(#{16px}, #{.7vw});
+$mobile-p-font-weight: 400;
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//Desk variables
+$desk-NavBar-height: 90px;
+$desk-main-container-padding: 5vh 5vw;
+$desk-NavBar-font-size: min(#{14px}, #{1.5vw});
+$desk-h1-font-size: 48px;
+$desk-h1-font-weight: 700;
+$desk-h2-font-size: 40px;
+$desk-h2-font-weight: 600;
+$desk-h3-font-size: 32px;
+$desk-h3-font-weight: 500;
+$desk-h4-font-size: 24px;
+$desk-h4-font-weight: 500;
+$desk-h5-font-size: 17.5px;
+$desk-h5-font-weight: 500;
+$desk-h6-font-size: 14px;
+$desk-h6-font-weight: 500;
+$desk-p-font-size: 13px;
+$desk-p-font-weight: 300;
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// Breakpoints
+@mixin display-large {
+    @media only screen and (min-width: 800px){
+        @content;
+    }
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// Mixins
+@mixin create-flexbox($direction, $justify){
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: center;
+}
+
+
+@mixin fadeIn($duration) {
+    animation: fadeIn $duration forwards;
+  
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+}

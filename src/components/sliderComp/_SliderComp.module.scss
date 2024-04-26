@@ -1,0 +1,47 @@
+@use '../../styles/globals' as g;
+
+.slider {
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+    @include g.create-flexbox(row, center);
+    .slide {
+        position: absolute; // Establece el posicionamiento absoluto para cada imagen dentro del slider
+        z-index: 1;
+        top: 0; // Coloca las imágenes en la parte superior del contenedor
+        opacity: 0; // Oculta inicialmente todas las imágenes
+        transition: opacity 1.5s ease-in-out; // Agrega una transición suave a la opacidad
+        width: 100%;
+        align-items: center;
+        .img{
+            position: absolute;
+            top: 0;
+            height: 100vh;
+            min-height: 100vh;
+            width: 100%;
+            object-fit: cover; /* La imagen se ajusta manteniendo su relación de aspecto, mostrando todo el contenido */
+            @include g.display-large{
+            
+            }
+        }
+        &.active {
+            opacity: 1; // Muestra la imagen activa
+        }
+    }
+}
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.9);
+    z-index: 20;
+}
+.bckgndWhite{
+    background-color: rgba(255,255,255,.8);
+}

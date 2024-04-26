@@ -1,0 +1,54 @@
+@use '../../styles/globals' as g;
+
+.container{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    z-index: 3000;
+    background-color: rgba(0,0,0,.7);
+    @include g.create-flexbox(row, center);
+    .dataContainer{
+        box-sizing: border-box;
+        padding: 10vh 10vw;
+        width: 80%;
+        height: 50vh;
+        max-width: 400px;
+        min-height: 150px;
+        border: 1px solid g.$grey-color;
+        border-radius: 10px;
+        background-color: inherit;
+        @include g.create-flexbox(column, space-between);
+
+        .text{
+            // width: 70%;
+            text-align: center;
+            color: inherit;
+            font-size: 15px;
+            border-radius: 10px;
+            background-color: inherit;
+
+        }
+    }
+    .accept{
+        border: none;
+        border-radius: 4px;
+        padding: 12px 24px;
+        background-color: rgba(0,0,0,.5);
+        color: inherit;
+        margin-top: 3vh;
+        font-size: 12px;
+        border: 1px solid g.$grey-color;
+        &:hover{
+            cursor: pointer;
+            box-shadow: 0 0 2px 2px g.$grey-color;
+        }
+        p{
+            color:inherit;
+        }
+        }
+}
+.containerWhite{
+    background-color: rgba(255,255,255,.5);
+    color: g.$dark-black-color;
+}

@@ -5,6 +5,10 @@
     // background-color: green;
     @include g.create-flexbox(row,flex-start);
     height: 100%;
+    @include g.display-large{
+        max-width: 550px;
+        width: 40%;
+    }
     .logo {
 
         // font-size: max(#{14px}, #{4vw});
@@ -18,7 +22,7 @@
 
 
         @include g.display-large {
-            // width: auto;
+            width: auto;
             // height: 50px;
             font-size: g.$desk-h3-font-size;
         }

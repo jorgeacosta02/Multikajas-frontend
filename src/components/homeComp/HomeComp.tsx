@@ -39,10 +39,6 @@ const HomeComp = () => {
           <LinksComp/>
           </div>
       </div>
-      {/* <div className={styles.shape}>
-        <h4 className={styles.firstName}>Jorge</h4>
-        <p className={styles.lastName}>ACOSTA</p>
-      </div> */}
     </div>
   );
 }

@@ -35,13 +35,14 @@
         height: auto;
         font-size: g.$desk-NavBar-font-size;
         font-weight: 300;
-        width: 100%;
-        min-width: 450px;
+        width: 40%;
+        max-width: 40%;
         background-color: transparent;
+        // background-color: brown;
     }
     .li{
         box-sizing: border-box;
-        width: 100%;
+        // width: 100%;
         padding-left: 10px;
         border: 1px solid g.$grey-color;
         @include g.display-large{

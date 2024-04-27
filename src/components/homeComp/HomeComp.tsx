@@ -35,9 +35,6 @@ const HomeComp = () => {
             <p
               className={styles.text}
             >
-              {/* {langState === 'es' ? 
-                'Este es mi portafolio web, el cual muestra mis proyectos, habilidades y formación académica.' 
-                : 'This is my web portfolio, which shows my projects, skills and academic training.'} */}
             </p>
           <LinksComp/>
           </div>

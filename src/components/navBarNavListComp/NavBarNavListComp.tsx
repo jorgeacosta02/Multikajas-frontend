@@ -108,7 +108,7 @@ const NavBarNavListComp = () => {
           to="/intranet" 
           className={navLinkColor} 
         >
-          Contacto
+          Intranet
         </NavLink>
       </li>
     </ul>

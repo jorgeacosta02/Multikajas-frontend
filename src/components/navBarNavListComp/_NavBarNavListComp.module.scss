@@ -4,7 +4,7 @@
     position: absolute;
     box-sizing: border-box;
     list-style: none;
-    @include g.create-flexbox(column, space-between);
+    @include g.create-flexbox(column, space-evenly);
     align-items: flex-start;
     width: 70%;
     min-width: 120px;
@@ -27,7 +27,7 @@
         position: relative;
         border: none;
         border-radius: none;
-        padding: 0;
+        padding: 0 3vw 0 0;
         box-shadow: none;
         flex-direction: row;
         top: 0;

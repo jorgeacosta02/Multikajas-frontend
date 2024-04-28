@@ -91,16 +91,26 @@ const NavBarNavListComp = () => {
           {langState === 'es' ? 'Formación' : 'Background'}
         </NavLink>
       </li> */}
-      {/* <li 
+      <li 
       className={styles.li}
       onClick={handleClick} >
         <NavLink
           to="/contact" 
           className={navLinkColor} 
         >
-          {langState === 'es' ? 'Contacto' : 'Contact'}
+          Contacto
         </NavLink>
-      </li> */}
+      </li>
+      <li 
+      className={styles.li}
+      onClick={handleClick} >
+        <NavLink
+          to="/intranet" 
+          className={navLinkColor} 
+        >
+          Contacto
+        </NavLink>
+      </li>
     </ul>
   )
 }

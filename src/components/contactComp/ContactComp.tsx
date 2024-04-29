@@ -170,7 +170,7 @@ const ContactComp: React.FC = () => {
     try{
       const response = await axios.post(
         // 'https://newportfolio-backend.onrender.com/contact',
-        'http://localhost:5001/contact',
+        'http://localhost:4000/contact',
          formData
       );
       console.log('response', response.status);
@@ -207,7 +207,7 @@ const ContactComp: React.FC = () => {
         <SliderComp/>
         <div className={styles.dataMainContainer}>
           <h4 className={styles.dataTitle}>
-            Mis datos de contacto
+            Datos de contacto
           </h4>
           <div className={styles.dataContainer}>
             <div className={styles.data}>
@@ -272,7 +272,7 @@ const ContactComp: React.FC = () => {
             <div className={styles.inputBlock}>
               <label 
                 htmlFor='email'>
-               'Correo'
+                Correo
               </label>
               <input 
                 type='text'

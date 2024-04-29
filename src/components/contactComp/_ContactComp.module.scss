@@ -1,9 +1,10 @@
 @use '../../styles/globals' as g;
 
 .container{
-    position: absolute;
+    // position: absolute;
     box-sizing: border-box;
     width: 100%;
+    min-height: 100vh;
     z-index: 100;
     color: g.$white-color;
     padding: g.$mobile-NavBar-height 5vw 0;

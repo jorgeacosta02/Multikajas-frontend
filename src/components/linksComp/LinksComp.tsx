@@ -50,7 +50,7 @@ const LinksComp = () => {
                     </svg>
                 </a>
             </div>
-            <a
+            {/* <a
                 className={styles.dwlResumeContainer}
                 href="https://github.com/jorgeacosta02/Resume/raw/main/Jorge Acosta Resume.pdf" download="Mi_CV.pdf" target="_blank">
                 <h6
@@ -58,7 +58,7 @@ const LinksComp = () => {
                 >
                     Descargar CV
                 </h6>
-            </a>
+            </a> */}
         </div>
     )
 }

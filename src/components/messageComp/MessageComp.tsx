@@ -3,12 +3,9 @@ import { useSelector } from 'react-redux'
 import { selectMoonState } from '../../redux/slices/moonSlice'
 import { useDispatch } from 'react-redux'
 import { toggleMessage } from '../../redux/slices/messageSlice'
-import { selectLangState } from '../../redux/slices/langSlice'
 
 
 const MessageComp = (props:any) => {
-
-    const langState = useSelector(selectLangState).lang
 
     const dispatch = useDispatch()
 
@@ -31,7 +28,7 @@ const MessageComp = (props:any) => {
                     className={styles.accept}
                     onClick={handleClick}
                 >
-                    {langState === 'es' ? 'Aceptar' : 'Accept'}
+                   Aceptar
                 </button>
             </div>
         </div>

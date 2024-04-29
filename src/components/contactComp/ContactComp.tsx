@@ -5,7 +5,6 @@ import axios from 'axios';
 import SliderComp from '../sliderComp/SliderComp';
 import LinksComp from '../linksComp/LinksComp';
 import MessageComp from '../messageComp/MessageComp';
-import { selectLangState } from '../../redux/slices/langSlice';
 import { selectMoonState } from '../../redux/slices/moonSlice';
 import { selectMessageState, toggleMessage } from '../../redux/slices/messageSlice';
 
@@ -22,7 +21,6 @@ export interface IFormDataShape {
 const ContactComp: React.FC = () => {
 
   // Estados globales para opciones
-  const langState = useSelector(selectLangState).lang;
   const moonState = useSelector(selectMoonState).moon;
   const messageState = useSelector(selectMessageState).message;
 
@@ -71,7 +69,7 @@ const ContactComp: React.FC = () => {
       if(!nameRegExp.test(value)){
         setErrors((prevData) => ({
           ...prevData,
-          [name]: langState === 'es' ? 'El nombre debe contener solo letras.' : 'The name must contain only letters.',
+          [name]: 'El nombre debe contener solo letras.'
         }));
       }else{
         setFormData((prevData) => ({
@@ -90,7 +88,7 @@ const ContactComp: React.FC = () => {
       if(!emailRegExp.test(value)){
         setErrors((prevData) => ({
           ...prevData,
-          [name]: langState === 'es' ? 'Debe ingresar un mail válido.': 'You must enter  a valid email.',
+          [name]: 'Debe ingresar un mail válido.'
         }));
         setFormData((prevData) => ({
           ...prevData,
@@ -121,9 +119,7 @@ const ContactComp: React.FC = () => {
     console.log('formData y errors in handleInputChange: ',formData, errors);
   }
 
-  const emptyMessage = langState === 'es' ?
-    'Este campo debe ser completado.' :
-    'This field must be filled out.';
+  const emptyMessage = 'Este campo debe ser completado.';
 
   const emptyValidationHandler =()=>{
     if(!formData.name){
@@ -211,13 +207,13 @@ const ContactComp: React.FC = () => {
         <SliderComp/>
         <div className={styles.dataMainContainer}>
           <h4 className={styles.dataTitle}>
-            {langState === 'es' ? 'Mis datos de contacto' : 'My contact data'}
+            Mis datos de contacto
           </h4>
           <div className={styles.dataContainer}>
             <div className={styles.data}>
               <div className={styles.dataBlock}>
                 <h6>
-                  {langState === 'es' ? 'Correo electrónico:' : 'Email:'}
+                  Correo electrónico:
                 </h6>
                 <p>
                   jorgeacostadeleon@yahoo.com
@@ -225,7 +221,7 @@ const ContactComp: React.FC = () => {
               </div>
               <div className={styles.dataBlock}>
                 <h6>
-                  {langState === 'es' ? 'Teléfono:' : 'Phone number:'}
+                  Teléfono:
                 </h6>
                 <p>
                   +54 9 264-673 0581
@@ -233,7 +229,7 @@ const ContactComp: React.FC = () => {
               </div>
               <div className={styles.dataBlock}>
                 <h6>
-                  {langState === 'es' ? 'Domicilio:' : 'Address:'}
+                  Domicilio:
                 </h6>
                 <p>
                   Barrio Cooperarq VIII - Manzana "A" - Casa 24 - Rivadavia - San Juan - Argentina. CP. 5400.
@@ -245,7 +241,7 @@ const ContactComp: React.FC = () => {
         </div>
         <div className={styles.formContainer}>
           <h4 className={styles.formTitle}>
-            {langState === 'es' ? 'Envíame un mensaje' : 'Send me a message'}
+            Envíame un mensaje
           </h4>
           <form
             className={styles.form}
@@ -254,7 +250,7 @@ const ContactComp: React.FC = () => {
             <div className={styles.inputBlock}>
               <label 
                 htmlFor='name'>
-                {langState === 'es' ? 'Nombre' : 'Name'}
+               Nombre
               </label>
               <input
                 type='text'
@@ -262,7 +258,7 @@ const ContactComp: React.FC = () => {
                 name='name' 
                 value={formData.name}
                 onChange={handleInputChange} 
-                placeholder={langState === 'es' ? 'Ingrese nombre...' :  'Enter name...'}
+                placeholder='Ingrese nombre...'
                 className={inputColor}
               />
               {
@@ -276,7 +272,7 @@ const ContactComp: React.FC = () => {
             <div className={styles.inputBlock}>
               <label 
                 htmlFor='email'>
-                {langState === 'es' ? 'Correo'  : 'Email'}
+               'Correo'
               </label>
               <input 
                 type='text'
@@ -285,7 +281,7 @@ const ContactComp: React.FC = () => {
                 value={formData.email}
                 onChange={handleInputChange}
                 className={inputColor}
-                placeholder={langState === 'es' ? 'Ingrese correo...' : 'Enter email...'}
+                placeholder='Ingrese correo...'
               />
               {
                 errors.email 
@@ -298,7 +294,7 @@ const ContactComp: React.FC = () => {
             <div className={styles.inputBlock}>
               <label 
                 htmlFor='subject'>
-                {langState === 'es'  ? 'Asunto' : 'Subject'}
+                Asunto
               </label>
               <input 
                 type="text"
@@ -306,7 +302,7 @@ const ContactComp: React.FC = () => {
                 name='subject'
                 value={formData.subject}
                 onChange={handleInputChange}
-                placeholder={langState === 'es' ? 'Ingrese asunto...' : 'Enter subject...'}
+                placeholder='Ingrese asunto...'
                 className={inputColor}
               />
               {
@@ -320,14 +316,14 @@ const ContactComp: React.FC = () => {
             <div className={styles.inputBlock}>
               <label 
                 htmlFor='message'>
-                {langState === 'es' ? 'Mensaje' : 'Message'}
+                Mensaje
               </label>
               <textarea 
                 id='message'
                 name='message'
                 value={formData.message}
                 onChange={handleInputChange}
-                placeholder={langState === 'es' ? 'Ingrese su mensaje...' : 'Enter your message...'}
+                placeholder='Ingrese su mensaje...'
                 className={textareaColor}
               />
               {
@@ -343,17 +339,14 @@ const ContactComp: React.FC = () => {
               type='submit'
             >
               <p>
-                { langState === 'es' ? 'Enviar' : 'Submit' }
+                Enviar
               </p>
             </button>
           </form>
         </div>
       { messageState && 
       <MessageComp
-        data={ langState === 'es' ?
-                'Mensaje enviado exitosamente' :
-                'Message sent successfully'
-              }
+        data='Mensaje enviado exitosamente'
       />}
     </div>
   )

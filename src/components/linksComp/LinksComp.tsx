@@ -1,10 +1,6 @@
 import styles from './_LinksComp.module.scss'
-import { selectLangState } from '../../redux/slices/langSlice'
-import { useSelector } from 'react-redux'
 
 const LinksComp = () => {
-
-    const langState = useSelector(selectLangState).lang;
     
     return (
         <div className={styles.container}>
@@ -59,7 +55,9 @@ const LinksComp = () => {
                 href="https://github.com/jorgeacosta02/Resume/raw/main/Jorge Acosta Resume.pdf" download="Mi_CV.pdf" target="_blank">
                 <h6
                 className={styles.dwlResume}
-                >{langState === 'es' ? 'Descargar CV' : 'Download Resume'}</h6>
+                >
+                    Descargar CV
+                </h6>
             </a>
         </div>
     )

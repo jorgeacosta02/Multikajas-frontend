@@ -1,21 +1,19 @@
 import styles from './_UserLoginComp.module.scss'
-import { IUserLoginData } from '../../Interfaces/userInterfaces';
+import { IUserLoginData } from '../../interfaces/userInterfaces';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios'
 import { selectUserAuth } from '../../redux/slices/userAuthSlice';
-import { loginUser } from '../../redux/actions/loginUserActions';
-import { useNavigate } from 'react-router-dom';
+// import { loginUser } from '../../redux/actions/loginUserActions';
+// import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { selectLangState } from '../../redux/slices/langSlice';
 import { toggleMessage } from '../../redux/slices/messageSlice';
 
 
 const UserLoginComp = () => {
 
     const userAuth = useSelector(selectUserAuth);
-    const langState = useSelector (selectLangState).lang;
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     // Estado de datos del formulario
     const [formData, setFormData] = useState<IUserLoginData>({
@@ -51,9 +49,7 @@ const UserLoginComp = () => {
        }));
     };
 
-    const emptyMessage = langState === 'es' ?
-     'Este campo debe ser completado.' :
-     'This field must be filled out.';
+    const emptyMessage = 'Este campo debe ser completado.'
  
     const emptyValidationHandler =()=>{
         if(!formData.dni){
@@ -84,7 +80,7 @@ const UserLoginComp = () => {
     const submitForm = async () => {
         try{
             const response = await axios.post(
-            'http://localhost:5000/login',
+            'http://localhost:4000/login',
                 formData
             );
             console.log('response', response.status);
@@ -121,7 +117,7 @@ const UserLoginComp = () => {
                     <div className={styles.inputBlock}>
                     <label 
                         htmlFor='dni'>
-                        {langState === 'es' ? 'DNI' : 'DNI'}
+                        'DNI'
                     </label>
                     <input
                         type='text'
@@ -129,7 +125,7 @@ const UserLoginComp = () => {
                         name='dni' 
                         value={formData.dni}
                         onChange={handleInputChange} 
-                        placeholder={langState === 'es' ? 'Ingrese dni...' :  'Enter dni...'}
+                        placeholder='Ingrese dni...'
                         // className={inputColor}
                     />
                     {
@@ -143,7 +139,7 @@ const UserLoginComp = () => {
                     <div className={styles.inputBlock}>
                     <label 
                     htmlFor='password'>
-                    {langState === 'es' ? 'Contraseña' : 'Password'}
+                        Contraseña
                     </label>
                     <input
                     type='text'
@@ -151,7 +147,7 @@ const UserLoginComp = () => {
                     name='password' 
                     value={formData.password}
                     onChange={handleInputChange} 
-                    placeholder={langState === 'es' ? 'Ingrese contraseña...' :  'Enter password...'}
+                    placeholder='Ingrese contraseña...'
                     // className={inputColor}
                     />
                     {

@@ -1,7 +1,7 @@
 // userSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { loginUser } from '../actions/loginUserActions';
-import { IUserData, ApiResponse } from '../../Interfaces/userInterfaces';
+import { IUserData, ApiResponse } from '../../interfaces/userInterfaces';
 
 
 interface UserState {

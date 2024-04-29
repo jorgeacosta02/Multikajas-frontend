@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { IUserDataFromDB } from '../../Interfaces/userInterfaces';
+import { IUserDataFromDB } from '../../interfaces/userInterfaces';
 
 
 export const loginUser: any = createAsyncThunk('/login', async (credentials: { dni: number; password: string }) => {

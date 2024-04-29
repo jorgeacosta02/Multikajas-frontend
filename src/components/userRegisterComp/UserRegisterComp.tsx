@@ -3,8 +3,7 @@ import { useState } from 'react';
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux';
 import MessageComp from '../messageComp/MessageComp';
-import { IUserRegisterData } from '../../Interfaces/userInterfaces';
-import { selectLangState } from '../../redux/slices/langSlice';
+import { IUserRegisterData } from '../../interfaces/userInterfaces';
 import { selectMessageState, toggleMessage } from '../../redux/slices/messageSlice';
 
 
@@ -12,7 +11,6 @@ import { selectMessageState, toggleMessage } from '../../redux/slices/messageSli
 const UserRegisterComp = () => {
 
    // Estados globales para opciones
-  const langState = useSelector(selectLangState).lang;
   const messageState = useSelector(selectMessageState).message;
   const dispatch = useDispatch()
    
@@ -128,9 +126,7 @@ const UserRegisterComp = () => {
     //  console.log('formData y errors in handleInputChange: ',formData, errors);
    }
  
-   const emptyMessage = langState === 'es' ?
-     'Este campo debe ser completado.' :
-     'This field must be filled out.';
+   const emptyMessage = 'Este campo debe ser completado.'
  
    const emptyValidationHandler =()=>{
      if(!formData.firstName){
@@ -157,12 +153,6 @@ const UserRegisterComp = () => {
          dni: emptyMessage,
        }));
      };
-    //  if(!formData.birthDate){
-    //    setErrors((prevData) => ({
-    //      ...prevData,
-    //      birthDate: emptyMessage,
-    //    }));
-    //  };
      if(!formData.phone){
        setErrors((prevData) => ({
          ...prevData,
@@ -204,16 +194,15 @@ const UserRegisterComp = () => {
    const submitForm = async () => {
      try{
        const response = await axios.post(
-         'http://localhost:5000/register',
+         'http://localhost:4000/register',
           formData
        );
-       console.log('response', response.status);
+       console.log('response.status', response.status);
        // queryResponse = await response.status;
        setFormData({
         firstName: '',
         lastName: '',
         dni: '',
-        // birthDate:'',
         phone: '',
         email: '',
         password: '',
@@ -241,7 +230,7 @@ const UserRegisterComp = () => {
           <div className={styles.inputBlock}>
               <label 
                 htmlFor='firstName'>
-                {langState === 'es' ? 'Nombre' : 'First Name'}
+                Nombre:
               </label>
               <input
                 type='text'
@@ -249,7 +238,7 @@ const UserRegisterComp = () => {
                 name='firstName' 
                 value={formData.firstName}
                 onChange={handleInputChange} 
-                placeholder={langState === 'es' ? 'Ingrese nombre...' :  'Enter first name...'}
+                placeholder='Ingrese nombre...'
                 // className={inputColor}
               />
               {
@@ -263,7 +252,7 @@ const UserRegisterComp = () => {
           <div className={styles.inputBlock}>
               <label 
                 htmlFor='lastName'>
-                {langState === 'es' ? 'Apellido' : 'LastName'}
+                Apellido:
               </label>
               <input
                 type='text'
@@ -271,7 +260,7 @@ const UserRegisterComp = () => {
                 name='lastName' 
                 value={formData.lastName}
                 onChange={handleInputChange} 
-                placeholder={langState === 'es' ? 'Ingrese apellido...' :  'Enter last name...'}
+                placeholder='Ingrese apellido...'
                 // className={inputColor}
               />
               {
@@ -285,7 +274,7 @@ const UserRegisterComp = () => {
           <div className={styles.inputBlock}>
               <label 
                 htmlFor='dni'>
-                {langState === 'es' ? 'DNI' : 'DNI'}
+                'DNI:'
               </label>
               <input
                 type='text'
@@ -293,7 +282,7 @@ const UserRegisterComp = () => {
                 name='dni' 
                 value={formData.dni}
                 onChange={handleInputChange} 
-                placeholder={langState === 'es' ? 'Ingrese dni...' :  'Enter dni...'}
+                placeholder='Ingrese dni...'
                 // className={inputColor}
               />
               {
@@ -304,32 +293,10 @@ const UserRegisterComp = () => {
                 </p>
               }
             </div>
-          {/* <div className={styles.inputBlock}>
-              <label 
-                htmlFor='birthDate'>
-                {langState === 'es' ? 'Fecha de nacimiento' : 'Birthdate'}
-              </label>
-              <input
-                type='text'
-                id='birthDate'
-                name='birthDate' 
-                value={formData.birthDate}
-                onChange={handleInputChange} 
-                placeholder={langState === 'es' ? 'Ingrese fecha de nacimiento...' :  'Enter birthdate...'}
-                // className={inputColor}
-              />
-              {
-                errors.birthDate 
-                && 
-                <p className={styles.errorMessage}>
-                  {errors.birthDate}
-                </p>
-              }
-            </div> */}
           <div className={styles.inputBlock}>
               <label 
                 htmlFor='phone'>
-                {langState === 'es' ? 'Teléfono' : 'Phone'}
+                Teléfono:
               </label>
               <input
                 type='text'
@@ -337,7 +304,7 @@ const UserRegisterComp = () => {
                 name='phone' 
                 value={formData.phone}
                 onChange={handleInputChange} 
-                placeholder={langState === 'es' ? 'Ingrese número de teléfono...' :  'Enter phone number...'}
+                placeholder='Ingrese número de teléfono...'
                 // className={inputColor}
               />
               {
@@ -351,7 +318,7 @@ const UserRegisterComp = () => {
           <div className={styles.inputBlock}>
               <label 
                 htmlFor='email'>
-                {langState === 'es' ? 'Correo electrónico' : 'Email'}
+                Correo electrónico:
               </label>
               <input
                 type='text'
@@ -359,7 +326,7 @@ const UserRegisterComp = () => {
                 name='email' 
                 value={formData.email}
                 onChange={handleInputChange} 
-                placeholder={langState === 'es' ? 'Ingrese correo electrónico...' :  'Enter email...'}
+                placeholder='Ingrese correo electrónico...'
                 // className={inputColor}
               />
               {
@@ -373,7 +340,7 @@ const UserRegisterComp = () => {
           <div className={styles.inputBlock}>
             <label 
               htmlFor='password'>
-              {langState === 'es' ? 'Contraseña' : 'Password'}
+              Contraseña:
             </label>
             <input
               type='text'
@@ -381,7 +348,7 @@ const UserRegisterComp = () => {
               name='password' 
               value={formData.password}
               onChange={handleInputChange} 
-              placeholder={langState === 'es' ? 'Ingrese contraseña...' :  'Enter password...'}
+              placeholder='Ingrese contraseña...'
               // className={inputColor}
             />
             {
@@ -395,7 +362,7 @@ const UserRegisterComp = () => {
           <div className={styles.inputBlock}>
               <label 
                 htmlFor='role'>
-                {langState === 'es' ? 'Rol' : 'Role'}
+                Rol:
               </label>
               <input
                 type='text'
@@ -403,7 +370,7 @@ const UserRegisterComp = () => {
                 name='role' 
                 value={formData.role}
                 onChange={handleInputChange} 
-                placeholder={langState === 'es' ? 'Ingrese rol...' :  'Enter role...'}
+                placeholder='Ingrese rol...'
                 // className={inputColor}
               />
               {
@@ -436,7 +403,6 @@ const UserRegisterComp = () => {
                 </p>
               }
             </div> */}
-      
           <button
             className={styles.submit}
             type='submit'
@@ -447,10 +413,7 @@ const UserRegisterComp = () => {
       </div>
       { messageState && 
       <MessageComp
-        data={ langState === 'es' ?
-                'Mensaje enviado exitosamente' :
-                'Message sent successfully'
-              }
+        data='Mensaje enviado exitosamente'
       />}
     </div>
   )

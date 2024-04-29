@@ -7,7 +7,6 @@ import { IUserRegisterData } from '../../interfaces/userInterfaces';
 import { selectMessageState, toggleMessage } from '../../redux/slices/messageSlice';
 
 
-
 const UserRegisterComp = () => {
 
    // Estados globales para opciones
@@ -19,7 +18,6 @@ const UserRegisterComp = () => {
     firstName: '',
     lastName: '',
     dni: '',
-    // birthDate:'',
     phone: '',
     email: '',
     password: '',
@@ -32,7 +30,6 @@ const UserRegisterComp = () => {
     firstName: '',
     lastName: '',
     dni: '',
-    // birthDate:'',
     phone: '',
     email: '',
     password: '',
@@ -47,7 +44,6 @@ const UserRegisterComp = () => {
     formData.firstName  !== '' &&
     formData.lastName  !== '' &&
     formData.dni  !== '' &&
-    // formData.birthDate !== '' &&
     formData.phone  !== '' &&
     formData.email  !== '' &&
     formData.password  !== '' &&

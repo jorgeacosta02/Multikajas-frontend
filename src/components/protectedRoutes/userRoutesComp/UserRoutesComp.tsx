@@ -1,10 +1,10 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { getDataFromLocalStorage } from "../../localStorageComp/LocalStorageComp";
+import { getFromLocalStorage } from "../../localStorageComp/LocalStorageComp";
 
 
 const UserRoutesComp = () => {
 
-  const accessLogin = getDataFromLocalStorage('accessLogin');
+  const accessLogin = getFromLocalStorage('accessLogin');
 
   console.log(accessLogin)
 

@@ -1,0 +1,102 @@
+@use'../../styles/globals' as g;
+
+.container{
+    padding: 5vh 0;
+    box-sizing: border-box;
+    background-image: url('../../assets/Images/Others/llenando-formulario.jpg');
+    color: g.$light-black-color;
+    width: 100vw;
+    min-height: 100vh;
+    @include g.create-flexbox(column, space-around);
+    background-size: cover;
+    .formContainer{
+        box-sizing: border-box;
+        padding: 4vh 4vw;
+        width: 90%;
+        max-width: 400px;
+        border: 2px solid g.$white-color;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px 5px rgba(255, 255, 255, 0.5);
+        form{
+            box-sizing: border-box;
+            width: 100%;
+            @include g.create-flexbox(column, space-between);
+            align-items: center;
+            gap: 2vh;
+            .title{
+                font-weight: 400;
+                margin: 0 0 10vh;
+                padding: 0;
+            }
+            .inputBlock{
+                width: 100%;
+                @include g.create-flexbox(column, center);
+                align-items: flex-start;
+                label{
+                    font-size: g.$mobile-p-font-size;
+                    @include g.display-large{
+                        font-size: g.$desk-p-font-size;
+                    }
+                }
+                input{
+                    box-sizing: border-box;
+                    width: 100%;
+                    font-size: g.$mobile-p-font-size;
+                    background-color: rgba(255,255,255,.7);
+                    border: none;
+                    height: 20px;
+                    @include g.display-large{
+                        font-size: g.$desk-p-font-size;
+                    }
+          
+                }
+                span{
+                    font-size: calc(g.$mobile-p-font-size * .9);
+                    color: g.$red-color;
+                    @include g.display-large{
+                        font-size: g.$desk-p-font-size;
+                    }
+                }
+            }
+            .submit{
+                cursor: pointer;
+                border:none;
+                color: g.$white-color;
+                background-color: g.$main-color;
+                border-radius: 18px / 18px;
+                width: 70%;
+                height: 36px;
+                font-weight: 300;
+                // font-size: calc(g.$mobile-h2-font-size * .85);
+                @include g.display-large{
+                    font-size: calc(g.$desk-h3-font-size * 1); 
+                };
+                margin: 5vh 0;
+            }.submit:hover{
+                background-color: g.$main-dark-color;
+            }.submit:disabled{
+                background-color: g.$main-light-color;
+                color: g.$grey-color;
+            }
+        }
+        .linkContainer{
+            color: g.$dark-black-color;
+            width: 100%;
+            font-size: calc(g.$mobile-p-font-size * .9);
+            @include g.display-large{
+                font-size: g.$desk-p-font-size;
+            }
+            @include g.create-flexbox(row, space-between);
+            .login{
+                text-decoration: none;
+                color: g.$main-dark-color;
+                font-size: calc(g.$mobile-p-font-size * 1);
+                font-weight: 400;
+                @include g.display-large{
+                    font-size: g.$desk-p-font-size;
+                }
+            }
+        }
+    }
+}

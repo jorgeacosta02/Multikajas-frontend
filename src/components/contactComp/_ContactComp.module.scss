@@ -11,7 +11,7 @@
     @include g.create-flexbox(column, space-between);
     @include g.display-large{
         flex-direction: row;
-        padding: calc(g.$desk-NavBar-height + 3vh) 0 0;
+        padding: calc(g.$desk-NavBar-height + 7vh) 0 0;
         align-items: flex-start;
         justify-content: space-evenly;
     }

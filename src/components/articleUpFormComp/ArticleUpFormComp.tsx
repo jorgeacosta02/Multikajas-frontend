@@ -5,9 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import MessageComp from '../messageComp/MessageComp';
 import { IArticleData } from '../../interfaces/articleInterfaces';
-
 import { selectMessageState, toggleMessage } from '../../redux/slices/messageSlice';
-
 
 
 const ArticleUpFormComp = () => {
@@ -18,25 +16,33 @@ const ArticleUpFormComp = () => {
    
   // Estado de datos del formulario
   const [formData, setFormData] = useState<IArticleData>({
-    name:'',
-    brand:'',
-    group1:'',
-    group2:''
+      type:'',
+      brand:'',
+      model:'',
+      year:'',
+      contition:'',
+      description:'',
+      image:'',
+      price:'',
   });
  
    // Estado de errores del formulario
    const [errors, setErrors] = useState<IArticleData>({
-    name:'',
-    brand:'',
-    group1:'',
-    group2:''
+      type:'',
+      brand:'',
+      model:'',
+      year:'',
+      contition:'',
+      description:'',
+      image:'',
+      price:'',
    });
    
    // Comprobación de estados para enviar formulario
    let submitOk = false;
   
   if(
-    formData.name !== '' &&
+    formData.type !== '' &&
     formData.brand !== ''
     // formData.group1 !== '' &&
     // formData.group2 !== ''
@@ -63,7 +69,7 @@ const ArticleUpFormComp = () => {
    const emptyMessage = 'Este campo debe ser completado.'
  
    const emptyValidationHandler =()=>{
-     if(!formData.name){
+     if(!formData.type){
        setErrors((prevData) => ({
          ...prevData,
          firstName: emptyMessage,
@@ -99,10 +105,14 @@ const ArticleUpFormComp = () => {
        console.log('response', response.status);
        // queryResponse = await response.status;
       setFormData({
-        name:'',
+        type:'',
         brand:'',
-        group1:'',
-        group2:''
+        model:'',
+        year:'',
+        contition:'',
+        description:'',
+        image:'',
+        price:'',
       })
  
        messageHandleClick()

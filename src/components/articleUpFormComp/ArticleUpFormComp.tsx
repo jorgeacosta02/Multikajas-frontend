@@ -138,23 +138,23 @@ const ArticleUpFormComp = () => {
           <div className={styles.dataContainer}>
             <div className={styles.inputBlock}>
               <label 
-                htmlFor='name'>
-                Nombre:
+                htmlFor='type'>
+                Tipo:
               </label>
               <input
                 type='text'
-                id='name'
-                name='name' 
-                value={formData.name}
+                id='type'
+                name='type' 
+                value={formData.type}
                 onChange={handleInputChange} 
-                placeholder='Ingrese nombre...'
+                placeholder='Ingrese tipo...'
                 className={styles.input}
               />
               {
-                errors.name 
+                errors.type 
                 && 
                 <p className={styles.errorMessage}>
-                  {errors.name}
+                  {errors.type}
                 </p>
               }
             </div>
@@ -182,16 +182,16 @@ const ArticleUpFormComp = () => {
             </div>
             <div className={styles.inputBlock}>
               <label 
-                htmlFor='group1'>
-                Grupo 1
+                htmlFor='model'>
+                Modelo
               </label>
               <input
                 type='text'
-                id='group1'
-                name='group1' 
-                value={formData.group1}
+                id='model'
+                name='model' 
+                value={formData.model}
                 onChange={handleInputChange} 
-                placeholder='Ingrese grupo 1...'
+                placeholder='Ingrese modelo...'
                 className={styles.input}
               />
               {/* {
@@ -204,16 +204,16 @@ const ArticleUpFormComp = () => {
             </div>
             <div className={styles.inputBlock}>
               <label 
-                htmlFor='group2'>
-                Grupo 2:
+                htmlFor='year'>
+                Año:
               </label>
               <input
                 type='text'
-                id='group2'
-                name='group2' 
-                value={formData.group2}
+                id='year'
+                name='year' 
+                value={formData.year}
                 onChange={handleInputChange} 
-                placeholder='Ingrese grupo 2...'
+                placeholder='Ingrese año...'
                 className={styles.input}
               />
               {/* {

@@ -6,9 +6,9 @@ export interface IArticleData {
     brand:'',
     model:'',
     year:'',
-    contition:'',
+    condition:'',
     description:'',
-    image:'',
+    images:[],
     price:'',
 }
 
@@ -20,8 +20,8 @@ export interface IArticleFormDB {
     brand:'',
     model:'',
     year:'',
-    contition:'',
+    condition:'',
     description:'',
-    image:'',
+    images:[],
     price:'',
 }

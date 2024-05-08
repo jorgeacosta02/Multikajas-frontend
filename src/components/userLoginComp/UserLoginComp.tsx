@@ -1,12 +1,13 @@
 import styles from './_UserLoginComp.module.scss'
 import { IUserLoginData } from '../../interfaces/userInterfaces';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios'
+// import axios from 'axios'
 import { selectUserAuth } from '../../redux/slices/userAuthSlice';
-// import { loginUser } from '../../redux/actions/loginUserActions';
+import { loginUser } from '../../redux/actions/loginUserActions';
 // import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { toggleMessage } from '../../redux/slices/messageSlice';
+
 
 
 const UserLoginComp = () => {
@@ -79,11 +80,19 @@ const UserLoginComp = () => {
 
     const submitForm = async () => {
         try{
-            const response = await axios.post(
-            'http://localhost:4000/login',
-                formData
-            );
-            console.log('response', response.status);
+
+
+
+
+            // const response = await axios.post(
+            // 'http://localhost:4000/user-login',
+            //     formData
+            // );
+            // console.log('response.statys', response.status);
+
+            dispatch(loginUser(formData));
+
+
             // queryResponse = await response.status;
             setFormData({
             dni: '',
@@ -97,9 +106,12 @@ const UserLoginComp = () => {
         }
     }
   
-    console.log('userAuth en LoginComp:  ',userAuth);
+    console.log('userAuth en UserLoginComp:  ',userAuth);
     
     console.log('document.cookie', document);
+
+    console.log('formData: ',formData);
+    
 
     // const userAuthCompleteReducer = useSelector((state: any) => state.userAuth.data);
     // console.log('userAuthCompleteReducer state.usrerAuth.data in LoginAction :',userAuthCompleteReducer);
@@ -161,6 +173,7 @@ const UserLoginComp = () => {
                     <button
                         className={styles.submit}
                         type='submit'
+                        onClick={handleSubmit}
                     >
                         Ingresar
                     </button>

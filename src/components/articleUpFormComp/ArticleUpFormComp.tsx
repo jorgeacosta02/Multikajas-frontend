@@ -136,17 +136,24 @@ const ArticleUpFormComp = () => {
 
         }
           // En este caso, el elemento no tiene una propiedad 'file', así que puedes manejarlo según tus necesidades
-          return 'no hay nada';
+          return null;
       }
       );
 
       const imageUrls = await Promise.all(imageUploadPromises);
+
       console.log('imageUrls: ', imageUrls);
+
+      setFormInfo({ ...formInfo, images: imageUrls });
+
+      
       
       const response = await axios.post(
         'http://localhost:4000/article',
         { ...formInfo, images: imageUrls }
       );
+
+      console.log('formInfo: ', formInfo);
 
       console.log('response', response.status);
       

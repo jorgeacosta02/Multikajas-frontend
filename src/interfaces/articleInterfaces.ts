@@ -8,7 +8,7 @@ export interface IArticleData {
     year:'',
     condition:'',
     description:'',
-    images:[],
+    images:any[],
     price:'',
 }
 
@@ -22,6 +22,6 @@ export interface IArticleFormDB {
     year:'',
     condition:'',
     description:'',
-    images:[],
+    images:any[],
     price:'',
 }

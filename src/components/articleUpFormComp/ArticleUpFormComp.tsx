@@ -8,13 +8,14 @@ import { IArticleData } from '../../interfaces/articleInterfaces';
 import { selectMessageState, toggleMessage } from '../../redux/slices/messageSlice';
 import ImageUploading, { ImageListType } from 'react-images-uploading';
 
+
 const ArticleUpFormComp = () => {
   // Estados globales para opciones
   const messageState = useSelector(selectMessageState).message;
   const dispatch = useDispatch();
 
   // Estado de datos del formulario
-  const [formData, setFormData] = useState<IArticleData>({
+  const [formInfo, setFormInfo] = useState<IArticleData>({
     type: '',
     brand: '',
     model: '',
@@ -26,7 +27,7 @@ const ArticleUpFormComp = () => {
   });
 
   // Estado de errores del formulario
-  const [errors, setErrors] = useState<IArticleData>({
+  const [errors, setErrors] = useState<Partial<IArticleData>>({
     type: '',
     brand: '',
     model: '',
@@ -38,90 +39,69 @@ const ArticleUpFormComp = () => {
   });
 
   // Comprobación de estados para enviar formulario
-  let submitOk = false;
+  // let submitOk = false;
 
-  if (
-    formData.type !== '' &&
-    formData.brand !== '' &&
-    formData.model !== '' &&
-    formData.year !== '' &&
-    formData.condition !== '' &&
-    formData.description !== '' &&
-    formData.price !== '' &&
-    formData.images.length > 0 // Verificamos si hay imágenes cargadas
-  ) {
-    submitOk = true;
-  }
+  // if (
+  //   formInfo.type !== '' &&
+  //   formInfo.brand !== '' &&
+  //   formInfo.model !== '' &&
+  //   formInfo.year !== '' &&
+  //   formInfo.condition !== '' &&
+  //   formInfo.description !== '' &&
+  //   formInfo.price !== '' &&
+  //   formInfo.images.length > 0 // Verificamos si hay imágenes cargadas
+  // ) {
+  //   submitOk = true;
+  // }
 
   // Expresiones de validación
-  const emptyMessage = 'Este campo debe ser completado.';
+  // const emptyMessage = 'Este campo debe ser completado.';
 
-  const emptyValidationHandler = () => {
-    if (!formData.type) {
-      setErrors((prevData) => ({
-        ...prevData,
-        type: emptyMessage,
-      }));
-    }
-    if (!formData.brand) {
-      setErrors((prevData) => ({
-        ...prevData,
-        brand: emptyMessage,
-      }));
-    }
-    if (!formData.model) {
-      setErrors((prevData) => ({
-        ...prevData,
-        model: emptyMessage,
-      }));
-    }
-    if (!formData.year) {
-      setErrors((prevData) => ({
-        ...prevData,
-        year: emptyMessage,
-      }));
-    }
-    if (!formData.condition) {
-      setErrors((prevData) => ({
-        ...prevData,
-        condition: emptyMessage,
-      }));
-    }
-    if (!formData.description) {
-      setErrors((prevData) => ({
-        ...prevData,
-        description: emptyMessage,
-      }));
-    }
-    if (!formData.price) {
-      setErrors((prevData) => ({
-        ...prevData,
-        price: emptyMessage,
-      }));
-    }
-    if (formData.images.length === 0) {
-      setErrors((prevData) => ({
-        ...prevData,
-        images: 'Debe cargar al menos una imagen.',
-      }));
-    }
-  };
+  // const emptyValidationHandler = () => {
+  //   let newErrors: Partial<IArticleData> = {};
+
+  //   if (!formInfo.type) {
+  //     newErrors.type = emptyMessage;
+  //   }
+  //   if (!formInfo.brand) {
+  //     newErrors.brand = emptyMessage;
+  //   }
+  //   if (!formInfo.model) {
+  //     newErrors.model = emptyMessage;
+  //   }
+  //   if (!formInfo.year) {
+  //     newErrors.year = emptyMessage;
+  //   }
+  //   if (!formInfo.condition) {
+  //     newErrors.condition = emptyMessage;
+  //   }
+  //   if (!formInfo.description) {
+  //     newErrors.description = emptyMessage;
+  //   }
+  //   if (!formInfo.price) {
+  //     newErrors.price = emptyMessage;
+  //   }
+  //   if (formInfo.images.length === 0) {
+  //     newErrors.images = 'Debe cargar al menos una imagen.';
+  //   }
+  //   setErrors(newErrors);
+  // };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
+    setFormInfo((prevData) => ({
       ...prevData,
       [name]: value,
     }));
-    setErrors((prevData) => ({
-      ...prevData,
+    setErrors((prevErrors) => ({
+      ...prevErrors,
       [name]: '',
     }));
   };
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    if (!submitOk) return emptyValidationHandler();
+    // if (!submitOk) return emptyValidationHandler();
     submitForm();
   };
 
@@ -129,14 +109,48 @@ const ArticleUpFormComp = () => {
     dispatch(toggleMessage());
   };
 
+
+  console.log('formInfo.images: ', formInfo.images);
+  
+
   const submitForm = async () => {
     try {
+      const imageUploadPromises = formInfo.images.map(async (image:any) => {
+
+        if (image.dataURL) {
+          const formData = new FormData();
+          formData.append('file', image.dataURL);
+          formData.append('upload_preset', 'Presets_react');
+          const response = await axios.post(
+            'https://api.cloudinary.com/v1_1/duyhgdoqn/image/upload',
+            formData,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            }
+          );
+          console.log('response.data.url: ',response.data.url);
+          
+          return response.data.url;
+
+        }
+          // En este caso, el elemento no tiene una propiedad 'file', así que puedes manejarlo según tus necesidades
+          return 'no hay nada';
+      }
+      );
+
+      const imageUrls = await Promise.all(imageUploadPromises);
+      console.log('imageUrls: ', imageUrls);
+      
       const response = await axios.post(
         'http://localhost:4000/article',
-        formData
+        { ...formInfo, images: imageUrls }
       );
+
       console.log('response', response.status);
-      setFormData({
+      
+      setFormInfo({
         type: '',
         brand: '',
         model: '',
@@ -152,16 +166,44 @@ const ArticleUpFormComp = () => {
     }
   };
 
+
+
+  // const submitForm = async () => {
+  //   try {
+  //     const response = await axios.post(
+  //       'http://localhost:4000/article',
+  //       formInfo
+  //     );
+  //     console.log('response', response.status);
+  //     setFormInfo({
+  //       type: '',
+  //       brand: '',
+  //       model: '',
+  //       year: '',
+  //       condition: '',
+  //       description: '',
+  //       images: [], // Limpiamos el array de imágenes después de enviar el formulario
+  //       price: '',
+  //     });
+  //     messageHandleClick();
+  //   } catch (error: any) {
+  //     console.log(error.message);
+  //   }
+  // };
+
   const handleImageChange = (imageList: ImageListType) => {
-    setFormData((prevData) => ({
+    setFormInfo((prevData:any) => ({
       ...prevData,
       images: imageList.map((image) => ({ dataURL: image.dataURL })),
     }));
-    setErrors((prevData) => ({
-      ...prevData,
-      images: '',
+    setErrors((prevErrors:any) => ({
+      ...prevErrors,
+      images: [],
     }));
   };
+
+  console.log({formInfo});
+  
 
   return (
     <div className={styles.container}>
@@ -177,7 +219,7 @@ const ArticleUpFormComp = () => {
                 type="text"
                 id="type"
                 name="type"
-                value={formData.type}
+                value={formInfo.type}
                 onChange={handleInputChange}
                 placeholder="Ingrese tipo..."
                 className={styles.input}
@@ -192,167 +234,170 @@ const ArticleUpFormComp = () => {
                 type="text"
                 id="brand"
                 name="brand"
-                value={formData.brand}
-                onChange={handleInputChange
-                  {errors.brand && (
-                    <p className={styles.errorMessage}>{errors.brand}</p>
-                  )}
-                  </div>
-                  <div className={styles.inputBlock}>
-                    <label htmlFor="model">Modelo:</label>
-                    <input
-                      type="text"
-                      id="model"
-                      name="model"
-                      value={formData.model}
-                      onChange={handleInputChange}
-                      placeholder="Ingrese modelo..."
-                      className={styles.input}
-                    />
-                    {errors.model && (
-                      <p className={styles.errorMessage}>{errors.model}</p>
-                    )}
-                  </div>
-                  <div className={styles.inputBlock}>
-                    <label htmlFor="year">Año:</label>
-                    <input
-                      type="text"
-                      id="year"
-                      name="year"
-                      value={formData.year}
-                      onChange={handleInputChange}
-                      placeholder="Ingrese año..."
-                      className={styles.input}
-                    />
-                    {errors.year && (
-                      <p className={styles.errorMessage}>{errors.year}</p>
-                    )}
-                  </div>
-                  <div className={styles.inputBlock}>
-                    <label htmlFor="condition">Condición:</label>
-                    <input
-                      type="text"
-                      id="condition"
-                      name="condition"
-                      value={formData.condition}
-                      onChange={handleInputChange}
-                      placeholder="Ingrese condición..."
-                      className={styles.input}
-                    />
-                    {errors.condition && (
-                      <p className={styles.errorMessage}>{errors.condition}</p>
-                    )}
-                  </div>
-                  <div className={styles.inputBlock}>
-                    <label htmlFor="description">Descripción:</label>
-                    <textarea
-                      id="description"
-                      name="description"
-                      value={formData.description}
-                      onChange={handleInputChange}
-                      placeholder="Ingrese descripción..."
-                      className={styles.input}
-                    />
-                    {errors.description && (
-                      <p className={styles.errorMessage}>{errors.description}</p>
-                    )}
-                  </div>
-                  <div className={styles.inputBlock}>
-                    <label htmlFor="price">Precio:</label>
-                    <input
-                      type="text"
-                      id="price"
-                      name="price"
-                      value={formData.price}
-                      onChange={handleInputChange}
-                      placeholder="Ingrese precio..."
-                      className={styles.input}
-                    />
-                    {errors.price && (
-                      <p className={styles.errorMessage}>{errors.price}</p>
-                    )}
-                  </div>
-                  
-                  {/* Agregar carga de imágenes */}
-                  <div className={styles.inputBlock}>
-                    <label>Cargar imágenes:</label>
-                    <ImageUploading
-                      multiple
-                      value={formData.images}
-                      onChange={handleImageChange}
-                      maxNumber={6}
-                      dataURLKey="dataURL"
-                    >
-                      {({
-                        imageList,
-                        onImageUpload,
-                        onImageRemoveAll,
-                        onImageUpdate,
-                        onImageRemove,
-                        isDragging,
-                        dragProps,
-                      }) => (
-                        <div className={styles.upload__image__wrapper}>
-                          <button
-                            className={styles.upload__image}
-                            style={isDragging ? { color: 'red' } : undefined}
-                            onClick={onImageUpload}
-                            {...dragProps}
-                          >
-                            Seleccionar imágenes
-                          </button>
-                          &nbsp;
-                          <button
-                            className={styles.upload__image}
-                            onClick={onImageRemoveAll}
-                          >
-                            Eliminar todas las imágenes
-                          </button>
-                          {imageList.map((image, index) => (
-                            <div key={index} className={styles.image__container}>
-                              <img src={image.dataURL} alt="" className={styles.uploaded__image} />
-                              <div className={styles.remove__image} onClick={() => onImageRemove(index)}>
-                                Eliminar
-                              </div>
-                            </div>
-                          ))}
+                value={formInfo.brand}
+                onChange={handleInputChange}
+                placeholder="Ingrese marca..."
+                className={styles.input}
+              />
+              {errors.brand && (
+                <p className={styles.errorMessage}>{errors.brand}</p>
+              )}
+            </div>
+            <div className={styles.inputBlock}>
+              <label htmlFor="model">Modelo:</label>
+              <input
+                type="text"
+                id="model"
+                name="model"
+                value={formInfo.model}
+                onChange={handleInputChange}
+                placeholder="Ingrese modelo..."
+                className={styles.input}
+              />
+              {errors.model && (
+                <p className={styles.errorMessage}>{errors.model}</p>
+              )}
+            </div>
+            <div className={styles.inputBlock}>
+              <label htmlFor="year">Año:</label>
+              <input
+                type="text"
+                id="year"
+                name="year"
+                value={formInfo.year}
+                onChange={handleInputChange}
+                placeholder="Ingrese año..."
+                className={styles.input}
+              />
+              {errors.year && 
+                <p className={styles.errorMessage}>{errors.year}</p>
+              }
+            </div>
+            <div className={styles.inputBlock}>
+              <label htmlFor="condition">Condición:</label>
+              <input
+                type="text"
+                id="condition"
+                name="condition"
+                value={formInfo.condition}
+                onChange={handleInputChange}
+                placeholder="Ingrese condición..."
+                className={styles.input}
+              />
+              {errors.condition && (
+                <p className={styles.errorMessage}>{errors.condition}</p>
+              )}
+            </div>
+            <div className={styles.inputBlock}>
+              <label htmlFor="description">Descripción:</label>
+              <textarea
+                id="description"
+                name="description"
+                value={formInfo.description}
+                onChange={handleInputChange}
+                placeholder="Ingrese descripción..."
+                className={styles.input}
+              />
+              {errors.description && (
+                  <p className={styles.errorMessage}>{errors.description}</p>
+                )}
+              </div>
+              <div className={styles.inputBlock}>
+                <label htmlFor="price">Precio:</label>
+                <input
+                  type="text"
+                  id="price"
+                  name="price"
+                  value={formInfo.price}
+                  onChange={handleInputChange}
+                  placeholder="Ingrese precio..."
+                  className={styles.input}
+                />
+                {errors.price && (
+                  <p className={styles.errorMessage}>{errors.price}</p>
+                )}
+              </div>
+              {/* Agregar carga de imágenes */}
+              <div className={styles.inputBlock}>
+                <label>Cargar imágenes:</label>
+                <ImageUploading
+                  multiple
+                  value={formInfo.images}
+                  onChange={handleImageChange}
+                  maxNumber={3}
+                  dataURLKey="dataURL"
+                >
+                  {({
+                      imageList,
+                      onImageUpload,
+                      onImageRemoveAll,
+                      onImageUpdate,
+                      onImageRemove,
+                      isDragging,
+                      dragProps,
+                    }) => (
+                    <div className={styles.upload__image__wrapper}>
+                      <button
+                        className={styles.upload__image}
+                        style={isDragging ? { color: 'red' } : undefined}
+                        onClick={onImageUpload}
+                        {...dragProps}
+                      >
+                        Seleccionar imágenes
+                      </button>
+                      &nbsp;
+                      <button
+                        className={styles.upload__image}
+                        onClick={onImageRemoveAll}
+                      >
+                        Eliminar todas las imágenes
+                      </button>
+                      {imageList.map((image, index) => (
+                        <div key={index} className={styles.image__container}>
+                          <img src={image.dataURL} alt="" className={styles.uploaded__image} />
+                          <div className={styles.remove__image} onClick={() => onImageRemove(index)}>
+                            Eliminar
+                          </div>
                         </div>
-                      )}
-                    </ImageUploading>
-                    {errors.images && (
-                      <p className={styles.errorMessage}>{errors.images}</p>
-                    )}
-                  </div>
-                  
-                  </div>
-                  <div className={styles.submitContainer}>
-                    <button
-                      className={styles.submit}
-                      type="submit"
-                    >
-                      Enviar formulario
-                    </button>
-                  </div>
-                  </form>
-                  <div className={styles.linksContainer}>
-                    <Link
-                      to="/intranet"
-                      className={styles.link}
-                    >
-                      Volver a Intranet
-                    </Link>
-                  </div>
-                  </div>
-                  {messageState && (
-                  <MessageComp
-                    data="Mensaje enviado exitosamente"
-                  />
+                      ))}
+                    </div>
                   )}
-                  </div>
-                  );
-                  };
-                  
-                  export default ArticleUpFormComp;
+                </ImageUploading>
+                {errors.images && (
+                  <p className={styles.errorMessage}>{errors.images}</p>
+                )}
+              </div>
+            </div>
+            <div className={styles.submitContainer}>
+              <button
+                className={styles.submit}
+                type="submit"
+              >
+                Enviar formulario
+              </button>
+            </div>
+          </form>
+          <div className={styles.linksContainer}>
+            <Link
+              to="/intranet"
+              className={styles.link}
+            >
+              Volver a Intranet
+            </Link>
+          </div>
+        </div>
+        {messageState && (
+          <MessageComp
+            data="Mensaje enviado exitosamente"
+          />
+        )}
+      </div>
+    );
+  };
+  
+  export default ArticleUpFormComp;
+  
+
                   
 
 

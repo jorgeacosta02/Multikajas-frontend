@@ -15,6 +15,7 @@ function App() {
         <Route path="/contact" element={<ContactPage/>}/>
         <Route element={<UserRoutesComp/>}>
           <Route path='/intranet' element={<IntranetPage/>} />
+          {/* <Route path='/article-up-form' element={</>} /> */}
         </Route>
         <Route path='/login' element={<UserLoginPage/>}/>
         <Route path="/article-up-form" element={<ArticleUpFormPage/>}/>

@@ -338,7 +338,7 @@ const ArticleUpFormComp = () => {
                       imageList,
                       onImageUpload,
                       onImageRemoveAll,
-                      onImageUpdate,
+                      // onImageUpdate,
                       onImageRemove,
                       isDragging,
                       dragProps,

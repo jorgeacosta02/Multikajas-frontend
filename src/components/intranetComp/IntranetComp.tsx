@@ -14,49 +14,12 @@ const IntranetComp = () => {
                 Generar formulario de:
             </h4>
             <div className={styles.linksContainer}>
-
-                    <NavLink 
-                        to='/article-up-form'
-                        className={styles.link}
-                    >
-                        Alta de artículo en almacenes
-                    </NavLink>
-   
-                    <NavLink 
-                        to='/location-up-form'
-                        className={styles.link}
-                    >
-                        Alta de location en almacenes
-                    </NavLink>
-    
-                    <NavLink 
-                        to='/inventory-movement'
-                        className={styles.link}
-                    >
-                        Movimiento en almacenes
-                    </NavLink>
-
-                    <NavLink 
-                        to='/inquiry'
-                        className={styles.link}
-                    >
-                        Consultas
-                    </NavLink>
-
-                    <NavLink 
-                        to='#'
-                        className={styles.link}
-                    >
-                        Reparación de veículos y equips
-                    </NavLink>
-
-                    <NavLink 
-                        to='#'
-                        className={styles.link}
-                    >
-                        Mantenimiento de instalaciones
-                    </NavLink>
-
+                <NavLink 
+                    to='/article-up-form'
+                    className={styles.link}
+                >
+                    Alta de artículo
+                </NavLink>
             </div>
         </div>
     </div>
